@@ -30,8 +30,8 @@ public class SftpTransfer implements TransferMethod<String> {
         try {
 
 //            String knownHostsFilename = "/home/username/.ssh/known_hosts";
-            jsch.setKnownHosts("C:\\temp\\authorized_keys");
-            jsch.addIdentity("C:\\temp\\id_rsa");
+//            jsch.setKnownHosts("C:\\temp\\authorized_keys");
+            jsch.addIdentity("C:\\tmp\\id_rsa");
 
             Session session = jsch.getSession(user, host);
             session.setPort(port);

@@ -14,33 +14,10 @@ import org.apache.sshd.server.sftp.SftpSubsystem;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.IOException;
 import java.security.PublicKey;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class SftpTransferTest {
-
-    public static SshServer createAndStartSshServer(int port) throws IOException {
-        SshServer sshd = SshServer.setUpDefaultServer();
-        sshd.setHost("localhost");
-        sshd.setPort(port);
-        sshd.setKeyPairProvider(new SimpleGeneratorHostKeyProvider("c:/temp/pair"));
-
-        List<NamedFactory<UserAuth>> userAuthFactories = new ArrayList<>();
-//        userAuthFactories.add(new UserAuthNone.Factory());
-        userAuthFactories.add(new UserAuthPublicKey.Factory());
-        sshd.setUserAuthFactories(userAuthFactories);
-
-        sshd.setCommandFactory(new ScpCommandFactory());
-
-        List<NamedFactory<Command>> namedFactoryList = new ArrayList<>();
-        namedFactoryList.add(new SftpSubsystem.Factory());
-        sshd.setSubsystemFactories(namedFactoryList);
-        sshd.start();
-        return sshd;
-    }
 
     private SshServer createSshServer( int port, String homeDir, String hostKeyPath ) {
         System.setProperty("user.dir",homeDir);
